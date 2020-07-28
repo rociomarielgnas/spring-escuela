@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Profesor;
 import com.example.demo.service.ProfesorService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+@Api(tags={"Profesor"} ) 
 @RestController
 public class ProfesorController {
 

@@ -15,10 +15,12 @@ import com.example.demo.entity.Alumno;
 import com.example.demo.entity.Materia;
 import com.example.demo.service.MateriaService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
+@Api(tags={"Materia"} ) 
 public class MateriaController {
 
 	@Autowired

@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Alumno;
 import com.example.demo.service.AlumnoService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
+@Api(tags={"Alumno"} ) 
 public class AlumnoController {
 
 	@Autowired
