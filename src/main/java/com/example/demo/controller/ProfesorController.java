@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Profesor;
 import com.example.demo.service.ProfesorService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
 public class ProfesorController {
 
@@ -21,38 +24,49 @@ public class ProfesorController {
 	private ProfesorService service;
 
 	@PostMapping("/addProfesor")
-	public Profesor addProfesor(@RequestBody Profesor profesor) {
+	@ApiOperation(value = "Agrega un profesor", notes = "Se usa para cargar un nuevo profesor.", response = Profesor.class)
+	public Profesor addProfesor(
+			@ApiParam(value = "Objeto profesor con la info", required = true) @RequestBody Profesor profesor) {
 		return service.saveProfesor(profesor);
 	}
 
 	@PostMapping("/addProfesores")
-	public List<Profesor> addProfesores(@RequestBody List<Profesor> profesores) {
+	@ApiOperation(value = "Agrega un conjunto de profesores", notes = "Se usa para cargar un conjunto de profesores al mismo tiempo.", response = List.class)
+	public List<Profesor> addProfesores(
+			@ApiParam(value = "Lista de profesores", required = true) @RequestBody List<Profesor> profesores) {
 		return service.saveProfesores(profesores);
 	}
 
 	@GetMapping("/profesores")
+	@ApiOperation(value = "Devuelve un listado con todos los profesores", notes = "Devuelve una lista con todos los profesores en la base.", response = Profesor.class)
 	public List<Profesor> findAllProfesores() {
 		return service.getProfesores();
 	}
 
 	@GetMapping("/profesorById/{id}")
-	public Profesor findProfesorById(@PathVariable Integer id) {
+	@ApiOperation(value = "Busca un profesor por id", notes = "Busca un profesor en la base en base al id.", response = Profesor.class)
+	public Profesor findProfesorById(
+			@ApiParam(value = "El id del profesor", required = true) @PathVariable Integer id) {
 		return service.getProfesorById(id);
 	}
 
 	@GetMapping("/profesores/{nombre}")
-	public Profesor findProfesorByNombre(@PathVariable String nombre) {
+	@ApiOperation(value = "Busca un profesor por nombre", notes = "Busca un profesor en la base en base al nombre.", response = Profesor.class)
+	public Profesor findProfesorByNombre(
+			@ApiParam(value = "El nombre del profesor", required = true) @PathVariable String nombre) {
 		return service.getProfesorByNombre(nombre);
 	}
 
 	@PutMapping("/updateProfesor")
-	public Profesor updateProfesor(@RequestBody Profesor profesor) {
+	@ApiOperation(value = "Actualiza info del profesor", notes = "Actualiza la info del profesor en la base de datos.", response = Profesor.class)
+	public Profesor updateProfesor(
+			@ApiParam(value = "Objeto profesor con la info", required = true) @RequestBody Profesor profesor) {
 		return service.updateProfesor(profesor);
 	}
 
-	@DeleteMapping("/deleteProfesor")
-	public String deleteProfesor(@PathVariable Integer id) {
+	@DeleteMapping("/deleteProfesor/{id}")
+	@ApiOperation(value = "Elimina un profesor", notes = "Elimina un profesor de la base de datos en base al id.", response = String.class)
+	public String deleteProfesor(@ApiParam(value = "El id del profesor", required = true) @PathVariable Integer id) {
 		return service.deleteProfesor(id);
 	}
 }
-
